@@ -165,7 +165,7 @@ sections:
           - pt-16
           - pl-16
           - pr-16
-        justifyContent: center
+        justifyContent: flex-end
       subtitle:
         textAlign: center
   - subtitle: Award winning enterprises trust us
