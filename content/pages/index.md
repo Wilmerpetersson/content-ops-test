@@ -185,7 +185,7 @@ sections:
       - url: /images/telus-logo.svg
         altText: Telus logo
         type: ImageBlock
-      - url: /images/sanity-logo.svg
+      - url: /images/telus-logo.svg
         altText: Sanity logo
         type: ImageBlock
       - url: /images/rangle-logo.svg
