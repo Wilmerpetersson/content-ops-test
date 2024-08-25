@@ -18,8 +18,33 @@ export default function FormBlock(props) {
 
         const data = new FormData(formRef.current);
         const value = Object.fromEntries(data.entries());
-        alert(`Form data: ${JSON.stringify(value)}`);
+
+        // Define the URL of the Netlify form endpoint
+        const endpoint = formRef.current.action;
+
+        // Send the form data using a POST request
+        fetch(endpoint, {
+            method: 'POST',
+            body: data,
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // or response.json() if your Netlify form returns JSON
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(result => {
+                // Handle the response from the server
+                console.log('Success:', result);
+                alert('Form submitted successfully!');
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form.');
+            });
     }
+
 
     return (
         <form
@@ -44,6 +69,7 @@ export default function FormBlock(props) {
             onSubmit={handleSubmit}
             ref={formRef}
             data-sb-field-path={fieldPath}
+            data-netlify="true"
         >
             <div
                 className={classNames('w-full', 'flex', 'flex-wrap', 'gap-8', mapStyles({ justifyContent: styles?.self?.justifyContent ?? 'flex-start' }))}
