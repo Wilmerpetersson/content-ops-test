@@ -17,7 +17,6 @@ export default function FormBlock(props) {
         event.preventDefault();
 
         const data = new FormData(formRef.current);
-        const value = Object.fromEntries(data.entries());
 
         // Define the URL of the Netlify form endpoint
         const endpoint = formRef.current.action;
@@ -44,6 +43,7 @@ export default function FormBlock(props) {
                 alert('An error occurred while submitting the form.');
             });
     }
+
 
 
     return (
