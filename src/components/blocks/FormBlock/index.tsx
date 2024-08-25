@@ -13,53 +13,32 @@ export default function FormBlock(props) {
         return null;
     }
 
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
 
-        const formData = new FormData(formRef.current);
-        const data = Object.fromEntries(formData.entries());
-
-        // If you want to display the data for debugging
-        // console.log(`Form data: ${JSON.stringify(data)}`);
-
-        try {
-            const response = await fetch('/', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
-
-            if (response.ok) {
-                alert('Form submitted successfully!');
-                formRef.current.reset();
-            } else {
-                alert('Form submission failed. Please try again.');
-            }
-        } catch (error) {
-            alert('Form submission failed. Please try again.');
-            console.error('Error submitting form:', error);
-        }
+        const data = new FormData(formRef.current);
+        const value = Object.fromEntries(data.entries());
+        alert(`Form data: ${JSON.stringify(value)}`);
     }
 
     return (
-        <form name="contact" className={classNames(
-            'sb-component',
-            'sb-component-block',
-            'sb-component-form-block',
-            className,
-            styles?.self?.margin ? mapStyles({ margin: styles?.self?.margin }) : undefined,
-            styles?.self?.padding ? mapStyles({ padding: styles?.self?.padding }) : undefined,
-            styles?.self?.borderWidth && styles?.self?.borderWidth !== 0 && styles?.self?.borderStyle !== 'none'
-                ? mapStyles({
-                    borderWidth: styles?.self?.borderWidth,
-                    borderStyle: styles?.self?.borderStyle,
-                    borderColor: styles?.self?.borderColor ?? 'border-primary'
-                })
-                : undefined,
-            styles?.self?.borderRadius ? mapStyles({ borderRadius: styles?.self?.borderRadius }) : undefined
-        )}
+        <form
+            className={classNames(
+                'sb-component',
+                'sb-component-block',
+                'sb-component-form-block',
+                className,
+                styles?.self?.margin ? mapStyles({ margin: styles?.self?.margin }) : undefined,
+                styles?.self?.padding ? mapStyles({ padding: styles?.self?.padding }) : undefined,
+                styles?.self?.borderWidth && styles?.self?.borderWidth !== 0 && styles?.self?.borderStyle !== 'none'
+                    ? mapStyles({
+                        borderWidth: styles?.self?.borderWidth,
+                        borderStyle: styles?.self?.borderStyle,
+                        borderColor: styles?.self?.borderColor ?? 'border-primary'
+                    })
+                    : undefined,
+                styles?.self?.borderRadius ? mapStyles({ borderRadius: styles?.self?.borderRadius }) : undefined
+            )}
             name={elementId}
             id={elementId}
             onSubmit={handleSubmit}
