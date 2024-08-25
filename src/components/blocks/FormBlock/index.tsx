@@ -25,7 +25,7 @@ export default function FormBlock(props) {
         <form
             name={elementId}
             method="POST"
-            netlify
+            data-netlify="true" // Netlify's custom attribute
             className={classNames(
                 'sb-component',
                 'sb-component-block',
@@ -69,5 +69,6 @@ export default function FormBlock(props) {
                 </div>
             )}
         </form>
+
     );
 }
